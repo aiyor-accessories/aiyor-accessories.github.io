@@ -1,0 +1,196 @@
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  font-family: Arial, sans-serif;
+  background-size: 300% 300%;
+  background: linear-gradient(135deg, #120018, #0a0a12, #1a0b1f);
+}
+
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px;
+}
+
+.HEADER,
+.products-grid,
+#cart-menu {
+  position: relative;
+  z-index: 2;
+}
+
+.HEADER {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(20, 10, 25, 0.6);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.header-1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  position: relative;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-color: gold;
+}
+
+.logo P{
+  font-family: 'Playfair Display', serif;
+  margin-left: 10px;
+  color: #b7becfd0;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 20px;
+  align-items: center;
+   text-shadow: 0 0 10px rgba(200, 200, 255, 0.4);
+}
+.AIYOR{
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}
+
+.moon-icon {
+  font-size: 18px;
+  margin-right: 6px;
+  color: #b5b5b5; /* soft gray */
+  text-shadow: 
+    0 0 6px #cfcfcf,
+    0 0 14px #9a9a9a;
+  filter: drop-shadow(0 0 6px rgba(180,180,180,0.6));
+}
+
+
+.instagram-button, 
+.whatsapp-button, 
+.panier-button {
+  border: none;
+  height: 40px;
+  width: 40px;
+  display: flex;              /* IMPORTANT */
+  align-items: center;        /* center vertically */
+  justify-content: center;    /* center horizontally */
+  border-radius: 50%;         /* optional (circle shape) */
+  cursor: pointer;
+}
+
+.instagram-button {
+  color: #E1306C; /* Instagram pink */
+}
+
+.whatsapp-button {
+  color: #25D366; /* WhatsApp green */
+}
+
+.panier-button {
+  color: #D4AF37; /* gold jewelry color */
+}
+
+.I-W-P {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.I-W-P i {
+  font-size: 20px;
+}
+
+.I-W-P button {
+  transition: transform 0.2s ease;
+}
+
+.I-W-P button:hover {
+  transform: scale(1.1);
+}
+
+
+
+.header-2 {
+  display: flex;
+  margin-right: 150px;
+  margin-left: 150px;
+  justify-content: center;
+  gap: 25px;
+  padding: 10px 40px;
+  border-top: 1px solid #ccc;
+  flex-wrap: wrap;
+}
+
+  .header-2 button {
+  width: 170px;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: none;
+  border-left: none;
+  border-right: none; 
+  color: #F7E7A1;
+  background: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+  border-bottom-color:  red;
+  border-width: 3px;
+  flex: 0 0 calc(20% - 15px); /* 5 per row */
+  }
+
+.header-2 button:hover {
+ transform: scale(1.1);
+}
+
+.header-2 button.active {
+  width: 190px;
+  background: linear-gradient(135deg, #ff4d6d, #ff85a2);
+  color: white;
+  border-radius: 20px;
+  padding: 5px 12px;
+  box-shadow: 0 6px 15px rgba(255, 77, 109, 0.3);
+  transform: scale(1.05);
+  transition: 0.25s ease;
+}
+
+/* smooth hover even when not active */
+.header-2 button {
+  transition: all 0.2s ease;
+}
+
+:root {
+  --header-height: 140px; /* adjust to your real header height */
+}
+
+body {
+  padding-top: var(--header-height);
+}
+
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 200px;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .HEADER {
+    position: relative; /* 👈 not fixed anymore */
+  }
+
+  body {
+    padding-top: 0; /* remove space since header is not fixed */
+  }
+}
