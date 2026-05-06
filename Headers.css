@@ -146,6 +146,7 @@ img {
   border-bottom-color:  red;
   border-width: 3px;
   flex: 0 0 calc(20% - 15px); /* 5 per row */
+  z-index: 9998;
   }
 
 .header-2 button:hover {

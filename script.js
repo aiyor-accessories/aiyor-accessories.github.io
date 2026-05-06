@@ -25,11 +25,14 @@ let currentLang = "ar";
   whale_tail_necklace:"قلادة ذيل الحوت",
   /*-------watches---------*/
   watch:" ساعة اليد",
-  /*-------bracelets---------*/
+  /*-------bracelets-gormets---------*/
   bracelet:"سوار",
    bracelet_tulip:"سوار توليب",
   chain_bracelet:"سوارالسلسلة",
   star_bracelet:"سوار النجمة",
+  /*-------bracelets---------*/
+  bracelet_bee:"سوار النحلة",
+  bracelet_clou:"سوار المسمار",
   /*-------rings---------*/
   ring: "خاتم",
  
@@ -77,11 +80,14 @@ let currentLang = "ar";
   whale_tail_necklace:"Collier du queue de baleine",
   /*-------WATCHES---------*/
   watch:"Montre",
-  /*-------BRACELETS---------*/
+  /*-------BRACELETS-gormets---------*/
   bracelet:"Bracelet",
   bracelet_tulip:"Bracelet Tulip",
   chain_bracelet:"Bracelet Chaîne",
   star_bracelet:"Bracelet Etoile",
+  /*-------BRACELETS---------*/
+  bracelet_bee:"Bracelet d'Abeille",
+  bracelet_clou:"Bracelet clou",
   /*-------RINGS---------*/
   ring:"Bague",
   
@@ -132,6 +138,9 @@ let currentLang = "ar";
   bracelet_tulip:"Tulip Bracelet",
   chain_bracelet:"Chain Bracelet",
   star_bracelet:"Star Bracelet ",
+  /*-------BRACELETS---------*/
+  bracelet_bee:"Bee Bracelet",
+  bracelet_clou:"Nail Bracelet",
   /*-------rings---------*/
   ring:"Ring",
   /*-------earrings---------*/
@@ -419,14 +428,14 @@ function searchProducts(value) {
   let query = value.toLowerCase().trim();
 
   products.forEach(product => {
-    let id = product.dataset.id?.toLowerCase() || "";
-    let category = product.dataset.category?.toLowerCase() || "";
-    let text = product.querySelector("p")?.textContent?.toLowerCase() || "";
+
+    const key = product.querySelector("p")?.dataset.i18n;
+    const translated = translations[currentLang][key]?.toLowerCase() || "";
+    const category = product.dataset.category?.toLowerCase() || "";
 
     const match =
-      id.includes(query) ||
-      category.includes(query) ||
-      text.includes(query);
+      translated.includes(query) ||
+      category.includes(query);
 
     product.style.display = match ? "block" : "none";
   });
@@ -688,18 +697,15 @@ suggestionsBox.innerHTML = "";
 
   // 🔥 ALWAYS GET LIVE PRODUCTS (FIX)
   let productsData = Array.from(document.querySelectorAll(".product")).map(p => ({
-    id: p.dataset.id,
-    element: p
-  }));
+  key: p.querySelector("p").dataset.i18n,
+  element: p
+}));
 
   let filtered = productsData.filter(p => {
-    let key = p.id;
-    let translated = translations[currentLang][key]?.toLowerCase() || "";
+  let translated = translations[currentLang][p.key]?.toLowerCase() || "";
 
-    return (
-      key.includes(value) || translated.includes(value)
-    );
-  });
+  return translated.includes(value);
+});
 
   if (filtered.length === 0) {
     suggestionsBox.innerHTML =
@@ -715,7 +721,7 @@ suggestionsBox.innerHTML = "";
   filtered.forEach((p, index) => {
   let div = document.createElement("div");
 
-  div.textContent = translations[currentLang][p.id] || p.id;
+  div.textContent = translations[currentLang][p.key];
   div.dataset.index = index;
 
   div.addEventListener("click", () => {
@@ -723,7 +729,7 @@ suggestionsBox.innerHTML = "";
     suggestionsBox.innerHTML = "";
     suggestionsBox.style.display = "none";
 
-    searchProducts(p.id);
+    searchProducts(translations[currentLang][p.key]);
   });
 
   suggestionsBox.appendChild(div);
